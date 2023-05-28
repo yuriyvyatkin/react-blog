@@ -1,9 +1,15 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import Spinner from 'components/Spinner';
 import { useEffect } from 'react';
+import {
+  Container,
+  Row,
+} from 'react-bootstrap';
 import Alert from 'react-bootstrap/Alert';
 import { useDispatch, useSelector } from 'react-redux';
 import { postsActions } from 'redux/actions';
+import './CardsTile.css';
+import CustomCard from './CustomCard'
 const { getPosts } = postsActions;
 
 export default function CardsTile() {
@@ -16,6 +22,14 @@ export default function CardsTile() {
     }
   }, []);
 
+  const tile = (
+    <Container>
+      <Row className="row-cols-1 row-cols-sm-2 row-cols-md-3 row-cols-lg-4 row-cols-xl-5">
+        <CustomCard />
+      </Row>
+    </Container>
+  );
+
   return (
     <>
       {error && (
@@ -26,6 +40,7 @@ export default function CardsTile() {
       {loading && !error ? (
         <Spinner />
       ) : (
+        // tile
         <div className="posts-container">
           {data &&
             data.slice(0, 10).map((post, i) => {

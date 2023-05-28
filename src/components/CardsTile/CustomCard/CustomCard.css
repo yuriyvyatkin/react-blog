@@ -1,0 +1,12 @@
+.avatar {
+  width: 100px;
+  height: 100px;
+  background-size: cover;
+  background-position: center;
+
+  background-image: url(images/avatar.jpg);
+}
+
+.comments {
+  max-height: 200px;
+}

@@ -1,0 +1,43 @@
+@media (max-width: 576px) {
+  .xs {
+    font-weight: bold;
+
+    color: red;
+  }
+}
+
+/* Small devices (landscape phones, 576px and up) */
+@media (min-width: 576px) and (max-width:768px) {
+  .sm {
+    font-weight: bold;
+
+    color: red;
+  }
+}
+
+/* Medium devices (tablets, 768px and up) */
+@media (min-width: 768px) and (max-width:992px) {
+  .md {
+    font-weight: bold;
+
+    color: red;
+  }
+}
+
+/* Large devices (desktops, 992px and up) */
+@media (min-width: 992px) and (max-width:1200px) {
+  .lg {
+    font-weight: bold;
+
+    color: red;
+  }
+}
+
+/* Extra large devices (large desktops, 1200px and up) */
+@media (min-width: 1200px) {
+  .xl {
+    font-weight: bold;
+
+    color: red;
+  }
+}

@@ -5,6 +5,7 @@ import { store } from 'redux/store';
 import ROUTES from "utils/routes";
 import './App.css';
 import CardsTile from './components/CardsTile';
+// import NotFound from 'pages/NotFound';
 
 function App() {
   return (
@@ -12,19 +13,11 @@ function App() {
       <Router basename={ROUTES.HOME}>
         {/* <Header /> */}
         {/* <Routes>
-          <Route exact path={ROUTES.HOME} element={ <Home/> } />
-          <Route exact path={ROUTES.ABOUT} element={ <About/> } />
+          <Route exact path={ROUTES.HOME} element={ <Home /> } />
+          <Route exact path={ROUTES.ABOUT} element={ <About /> } />
+          <Route exact path={ROUTES.USER} element={ <User /> } />
           <Route path={'*
-          '} element={ <NotFound/> } />
-        </Routes> */}
-        {/* <Routes>
-          {routes.map((route, index) => (
-            <Route
-              key={index}
-              path={route.path}
-              component={route.component}
-            />
-          ))}
+          '} element={ <NotFound /> } />
         </Routes> */}
         <div className="app-container">
           <CardsTile />
