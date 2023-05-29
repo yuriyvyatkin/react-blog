@@ -4,7 +4,6 @@ import { Posts } from 'redux/constants/postsConstant';
 import API from './API';
 const { getPostsSuccess, getPostsError } = postsActions;
 
-
 function* getPostsDataSaga(action) {
   try {
     const postsResponse = yield call(() => API.get('/posts'), action.payload);

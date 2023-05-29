@@ -1,13 +1,33 @@
-import { useState } from 'react';
+import Alert from 'components/Alert';
+import Spinner from 'components/Spinner';
 import { Button, Card, Col } from 'react-bootstrap';
+import { useDispatch, useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
+import { commentsActions } from 'redux/actions';
+import Comments from './Comments';
 import './CustomCard.css';
+const { getComments } = commentsActions;
 
-export default function CustomCard() {
-  const [showComments, setShowComments] = useState(false);
+export default function CustomCard({ id, title, body }) {
+  const dispatch = useDispatch();
+  const { loading, data, error, postId } = useSelector(
+    (state) => state.comments,
+  );
 
-  const toggleComments = () => {
-    setShowComments(!showComments);
+  let comments;
+
+  if (id === postId) {
+    if (loading) {
+      comments = <Spinner />;
+    } else if (error) {
+      comments = <Alert>{error}</Alert>;
+    } else {
+      comments = <Comments data={data} />;
+    }
+  }
+
+  const handleClick = () => {
+    dispatch(getComments(id));
   };
 
   return (
@@ -18,31 +38,17 @@ export default function CustomCard() {
             <div className="avatar d-flex align-items-center justify-content-center rounded-circle bg-gray p-2"></div>
           </Link>
         </div>
-        <Card.Body className="d-flex flex-column align-items-center">
-          <Card.Title>Card title</Card.Title>
-          <Card.Text>
-            This is a longer card with supporting text below as a natural
-            lead-in to additional content. This content is a little bit longer.
-          </Card.Text>
-          <Button variant="primary" onClick={toggleComments}>
+        <Card.Body className="d-flex flex-column">
+          <Card.Title>{title}</Card.Title>
+          <Card.Text>{body}</Card.Text>
+          <Button
+            className="mt-auto"
+            variant="primary"
+            onClick={handleClick}
+          >
             Комментарии
           </Button>
-          {showComments && (
-            <div className="comments overflow-auto w-100 mt-3">
-              <ul className="list-group">
-                <li className="list-group-item">Комментарий 1</li>
-                <li className="list-group-item">Комментарий 2</li>
-                <li className="list-group-item">Комментарий 3</li>
-                <li className="list-group-item">Комментарий 4</li>
-                <li className="list-group-item">Комментарий 5</li>
-                <li className="list-group-item">Комментарий 6</li>
-                <li className="list-group-item">Комментарий 7</li>
-                <li className="list-group-item">Комментарий 8</li>
-                <li className="list-group-item">Комментарий 9</li>
-                <li className="list-group-item">Комментарий 10</li>
-              </ul>
-            </div>
-          )}
+          {comments}
         </Card.Body>
       </Card>
     </Col>

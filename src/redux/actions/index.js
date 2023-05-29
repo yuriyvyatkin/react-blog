@@ -1,3 +1,5 @@
-import * as postsActions from "./postsAction";
+import * as postsActions from "./postsActions";
+import * as commentsActions from "./commentsActions";
 
 export { postsActions };
+export { commentsActions };

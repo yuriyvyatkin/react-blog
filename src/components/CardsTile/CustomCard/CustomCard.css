@@ -4,9 +4,5 @@
   background-size: cover;
   background-position: center;
 
-  background-image: url(images/avatar.jpg);
-}
-
-.comments {
-  max-height: 200px;
+  background-image: url(assets/avatar.jpg);
 }

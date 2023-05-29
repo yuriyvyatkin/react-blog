@@ -16,9 +16,9 @@ export const postsReducer = (state = initialState, { type, payload }) => {
           payload.users[Math.floor(Math.random() * payload.users.length)];
         return { ...item, user: randomUser };
       });
-      return { ...state, loading: false, data: posts, error: null };
+      return { ...state, loading: false, data: posts };
     case Posts.getPostsError:
-      return { ...state, loading: false, error: null };
+      return { ...state, loading: false, error: payload };
     default:
       return state;
   }
