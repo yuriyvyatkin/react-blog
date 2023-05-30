@@ -3,6 +3,7 @@ import { Posts } from 'redux/constants/postsConstant';
 const initialState = {
   loading: false,
   data: null,
+  dataChunk: null,
   error: null,
 };
 

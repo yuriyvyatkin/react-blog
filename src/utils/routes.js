@@ -1,7 +1,8 @@
 const ROUTES = {
-  HOME: "/",
-  ABOUT: "/about",
-  USER: "/user/:userId"
+  HOME: '/',
+  ABOUT: '/about',
+  USER: '/user/:userId',
+  ANY: '*',
 };
 
 export default ROUTES;

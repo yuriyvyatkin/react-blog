@@ -1,6 +1,6 @@
 import Alert from 'react-bootstrap/Alert';
 
-export default function CustomCard({ children }) {
+export default function CustomAlert({ children }) {
   return (
     <Alert key="warning" variant="warning">
       <Alert.Heading

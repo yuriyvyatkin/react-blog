@@ -1,3 +1,4 @@
+import { ListGroup } from 'react-bootstrap';
 import './Comments.css';
 
 export default function CustomCard({ data }) {
@@ -7,13 +8,18 @@ export default function CustomCard({ data }) {
 
   return (
     <div className="comments overflow-auto w-100 mt-3">
-      <ul className="list-group">
+      <ListGroup>
         {data.map(({ id, email, body }) => (
-          <li key={id} className="list-group-item">
-            {body}
-          </li>
+          <ListGroup.Item key={id}>
+            <h5>
+              <a href={`mailto:${email}`} target="_blank" rel="noreferrer">
+                {email}
+              </a>
+            </h5>
+            <span>{body}</span>
+          </ListGroup.Item>
         ))}
-      </ul>
+      </ListGroup>
     </div>
   );
 }

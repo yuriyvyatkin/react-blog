@@ -1,0 +1,16 @@
+.disabled {
+  cursor: not-allowed;
+}
+
+.disabled .page-link {
+  background-color: lightgray;
+}
+
+.page-link:focus {
+  background-color: initial;
+  box-shadow: none;
+}
+
+.page-item:not(.active) > .page-link:hover {
+  background-color: greenyellow;
+}

@@ -1,4 +1,4 @@
-import Alert from 'components/Alert';
+import CustomAlert from 'components/CustomAlert';
 import Spinner from 'components/Spinner';
 import { Button, Card, Col } from 'react-bootstrap';
 import { useDispatch, useSelector } from 'react-redux';
@@ -20,7 +20,7 @@ export default function CustomCard({ id, title, body }) {
     if (loading) {
       comments = <Spinner />;
     } else if (error) {
-      comments = <Alert>{error}</Alert>;
+      comments = <CustomAlert>{error}</CustomAlert>;
     } else {
       comments = <Comments data={data} />;
     }
@@ -34,7 +34,7 @@ export default function CustomCard({ id, title, body }) {
     <Col className="mb-4">
       <Card>
         <div className="d-flex align-items-center justify-content-center pt-3">
-          <Link to="/user/1">
+          <Link to={`/user/${id}`}>
             <div className="avatar d-flex align-items-center justify-content-center rounded-circle bg-gray p-2"></div>
           </Link>
         </div>

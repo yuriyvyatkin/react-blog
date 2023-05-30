@@ -1,5 +1,5 @@
 /* eslint-disable react-hooks/exhaustive-deps */
-import Alert from 'components/Alert';
+import CustomAlert from 'components/CustomAlert';
 import Spinner from 'components/Spinner';
 import { useEffect } from 'react';
 import { Container, Row } from 'react-bootstrap';
@@ -25,14 +25,14 @@ export default function CardsTile() {
         <Spinner />
       ) : (
         <Container>
-          {error && <Alert>{error}</Alert>}
+          {/* {error && <CustomAlert>{error}</CustomAlert>}
           {data && (
             <Row className="row-cols-1 row-cols-sm-2 row-cols-md-3 row-cols-lg-4 row-cols-xl-5">
               {data.map(({ id, title, body }) => (
                 <CustomCard key={id} id={id} title={title} body={body} />
               ))}
             </Row>
-          )}
+          )} */}
         </Container>
         // <div className="posts-container">
         //   {data &&
