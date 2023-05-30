@@ -19,3 +19,10 @@ export const getPostsError = (data) => {
     payload: data,
   };
 };
+
+export const setPostsChunk = (data) => {
+  return {
+    type: Posts.setPostsChunk,
+    payload: data,
+  };
+};

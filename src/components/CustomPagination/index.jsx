@@ -1,31 +1,36 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import { useState, useEffect } from 'react';
 import Pagination from 'react-bootstrap/Pagination';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import './CustomPagination.css';
+import { postsActions } from 'redux/actions';
+const { setPostsChunk } = postsActions;
 
 export default function CustomPagination({
   cardsPerPage,
   maxConsecutiveItems,
 }) {
-  // const [offset, setOffset] = useState(0);
+  const dispatch = useDispatch();
   const { data } = useSelector((state) => state.posts);
   const [activePage, setActivePage] = useState(1);
   const [items, setItems] = useState([]);
 
-  const handleItemClick = (event) => {
-    const pageNumber = Number(event.currentTarget.dataset.pageNumber);
-    setActivePage(pageNumber);
-  };
-
-  const getPaginationItems = (
+  const getPaginationItems = ({
     startNumber,
     pagesNumber,
     activePage,
     prevPaginationItems,
     lastPaginationItems,
-  ) => {
-    let items = [...prevPaginationItems];
+  }) => {
+    const handleItemClick = (event) => {
+      const pageNumber = Number(event.currentTarget.dataset.pageNumber);
+      setActivePage(pageNumber);
+    };
+    let items = [];
+
+    if (prevPaginationItems) {
+      items.push(...prevPaginationItems);
+    }
 
     for (let number = startNumber; number <= pagesNumber; number++) {
       const newItem = (
@@ -42,13 +47,19 @@ export default function CustomPagination({
       items.push(newItem);
     }
 
-    items.push(...lastPaginationItems);
+    if (lastPaginationItems) {
+      items.push(...lastPaginationItems);
+    }
 
     return items;
   };
 
   useEffect(() => {
     if (data !== null) {
+      const startItemIndex = (activePage - 1) * cardsPerPage + 1;
+      const lastItemIndex = startItemIndex + cardsPerPage;
+      dispatch(setPostsChunk(data.slice(startItemIndex, lastItemIndex)));
+
       const pagesNumber = Math.ceil(data.length / cardsPerPage);
       const prevPaginationItems = [
         <Pagination.First
@@ -90,47 +101,87 @@ export default function CustomPagination({
 
       if (pagesNumber === 1) {
         return null;
-      } else if (pagesNumber <= maxConsecutiveItems) {
-        newItems = getPaginationItems(
-          1,
+      }
+
+      if (pagesNumber <= maxConsecutiveItems) {
+        newItems = getPaginationItems({
+          startNumber: 1,
           pagesNumber,
           activePage,
           prevPaginationItems,
           lastPaginationItems,
-        );
+        });
       } else {
-        newItems = getPaginationItems(
-          1,
-          pagesNumber,
-          activePage,
-          prevPaginationItems,
-          lastPaginationItems,
-        );
+        if (activePage < maxConsecutiveItems) {
+          newItems = getPaginationItems({
+            startNumber: 1,
+            pagesNumber: maxConsecutiveItems,
+            activePage,
+            prevPaginationItems,
+          });
+          newItems.push(
+            <Pagination.Ellipsis className="ellipsis" key={'ellipsis'} />,
+          );
+          newItems.push(
+            getPaginationItems({
+              startNumber: pagesNumber,
+              pagesNumber,
+              activePage,
+              lastPaginationItems,
+            }),
+          );
+        } else if (activePage > pagesNumber - maxConsecutiveItems + 1) {
+          newItems = getPaginationItems({
+            startNumber: 1,
+            pagesNumber: 1,
+            activePage,
+            prevPaginationItems,
+          });
+          newItems.push(
+            <Pagination.Ellipsis className="ellipsis" key={'ellipsis'} />,
+          );
+          newItems.push(
+            getPaginationItems({
+              startNumber: pagesNumber - maxConsecutiveItems + 1,
+              pagesNumber,
+              activePage,
+              lastPaginationItems,
+            }),
+          );
+        } else {
+          newItems = getPaginationItems({
+            startNumber: 1,
+            pagesNumber: 1,
+            activePage,
+            prevPaginationItems,
+          });
+          newItems.push(
+            <Pagination.Ellipsis className="ellipsis" key={'ellipsis-1'} />,
+          );
+          newItems.push(
+            getPaginationItems({
+              startNumber: activePage - 1,
+              pagesNumber: activePage + 1,
+              activePage,
+            }),
+          );
+          newItems.push(
+            <Pagination.Ellipsis className="ellipsis" key={'ellipsis-2'} />,
+          );
+          newItems.push(
+            getPaginationItems({
+              startNumber: pagesNumber,
+              pagesNumber,
+              activePage,
+              lastPaginationItems,
+            }),
+          );
+        }
       }
 
       setItems(newItems);
     }
   }, [data, cardsPerPage, activePage]);
-
-  //   return (
-  //     <Pagination>
-  //       <Pagination.First active={activePage === 1} onClick={() => setActivePage(1)} />
-  //       <Pagination.Prev disabled={activePage === 1} />
-  //       <Pagination.Item>{1}</Pagination.Item>
-  //       <Pagination.Ellipsis />
-
-  //       <Pagination.Item>{10}</Pagination.Item>
-  //       <Pagination.Item>{11}</Pagination.Item>
-  //       <Pagination.Item active>{12}</Pagination.Item>
-  //       <Pagination.Item>{13}</Pagination.Item>
-  //       <Pagination.Item disabled>{14}</Pagination.Item>
-
-  //       <Pagination.Ellipsis />
-  //       <Pagination.Item>{20}</Pagination.Item>
-  //       <Pagination.Next />
-  //       <Pagination.Last />
-  //     </Pagination>
-  //   );
 
   return <Pagination>{items}</Pagination>;
 }

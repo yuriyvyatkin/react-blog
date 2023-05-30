@@ -20,6 +20,8 @@ export const postsReducer = (state = initialState, { type, payload }) => {
       return { ...state, loading: false, data: posts };
     case Posts.getPostsError:
       return { ...state, loading: false, error: payload };
+    case Posts.setPostsChunk:
+      return { ...state, dataChunk: payload };
     default:
       return state;
   }

@@ -14,3 +14,8 @@
 .page-item:not(.active) > .page-link:hover {
   background-color: greenyellow;
 }
+
+.page-item.ellipsis > .page-link:hover {
+  background-color: initial;
+  cursor: auto;
+}

@@ -5,7 +5,7 @@ export default function Home() {
   return (
     <>
       <CardsTile />
-      <Pagination cardsPerPage={10} maxConsecutiveItems={7} />
+      <Pagination cardsPerPage={12} maxConsecutiveItems={5} />
     </>
   );
 }
