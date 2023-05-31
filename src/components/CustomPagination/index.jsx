@@ -11,7 +11,7 @@ export default function CustomPagination({
   maxConsecutiveItems,
 }) {
   const dispatch = useDispatch();
-  const { data,  } = useSelector((state) => state.posts);
+  const { data, filteredData } = useSelector((state) => state.posts);
   const [activePage, setActivePage] = useState(1);
   const [items, setItems] = useState([]);
 
@@ -56,11 +56,21 @@ export default function CustomPagination({
 
   useEffect(() => {
     if (data !== null) {
-      const startItemIndex = (activePage - 1) * cardsPerPage + 1;
+      const actualData = filteredData || data;
+      const startItemIndex = (activePage - 1) * (cardsPerPage + 1);
       const lastItemIndex = startItemIndex + cardsPerPage;
-      dispatch(setPostsChunk(data.slice(startItemIndex, lastItemIndex)));
+      dispatch(setPostsChunk(actualData.slice(startItemIndex, lastItemIndex)));
 
-      const pagesNumber = Math.ceil(data.length / cardsPerPage);
+      const pagesNumber = Math.ceil(actualData.length / cardsPerPage);
+
+      setItems([]);
+
+      let newItems = [];
+
+      if (pagesNumber === 1) {
+        return;
+      }
+
       const prevPaginationItems = [
         <Pagination.First
           key={'prev-1'}
@@ -89,19 +99,6 @@ export default function CustomPagination({
           onClick={() => setActivePage(pagesNumber)}
         />,
       ];
-
-      setItems([
-        <Pagination.First
-          active={activePage === 1}
-          onClick={() => setActivePage(1)}
-        />,
-      ]);
-
-      let newItems = [];
-
-      if (pagesNumber === 1) {
-        return null;
-      }
 
       if (pagesNumber <= maxConsecutiveItems) {
         newItems = getPaginationItems({
@@ -181,7 +178,7 @@ export default function CustomPagination({
 
       setItems(newItems);
     }
-  }, [data, cardsPerPage, activePage]);
+  }, [data, filteredData, cardsPerPage, activePage]);
 
   return <Pagination>{items}</Pagination>;
 }

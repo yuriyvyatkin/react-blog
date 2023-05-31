@@ -11,7 +11,7 @@ const { getPosts } = postsActions;
 
 export default function CardsTile() {
   const dispatch = useDispatch();
-  const { loading, data, dataChunk, error } = useSelector((state) => state.posts);
+  const { loading, data, filteredData, dataChunk, error } = useSelector((state) => state.posts);
 
   useEffect(() => {
     if (!data) {
