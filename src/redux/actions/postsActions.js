@@ -26,3 +26,10 @@ export const setPostsChunk = (data) => {
     payload: data,
   };
 };
+
+export const filterPostsByTitle = (data) => {
+  return {
+    type: Posts.filterPostsByTitle,
+    payload: data,
+  };
+};

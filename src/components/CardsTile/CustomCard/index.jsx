@@ -46,7 +46,7 @@ export default function CustomCard({ id, title, body }) {
             variant="primary"
             onClick={handleClick}
           >
-            Комментарии
+            Comments
           </Button>
           {comments}
         </Card.Body>

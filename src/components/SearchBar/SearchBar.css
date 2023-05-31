@@ -1,0 +1,20 @@
+.input-wrapper {
+  position: relative;
+}
+
+.search-input {
+  width: 400px;
+  padding-right: 55px;
+}
+
+.reset-button {
+  position: absolute;
+  top: 50%;
+  right: 10px;
+
+  transform: translateY(-50%);
+}
+
+.search-button {
+  margin-left: 20px;
+}

@@ -11,7 +11,7 @@ export default function CustomPagination({
   maxConsecutiveItems,
 }) {
   const dispatch = useDispatch();
-  const { data } = useSelector((state) => state.posts);
+  const { data,  } = useSelector((state) => state.posts);
   const [activePage, setActivePage] = useState(1);
   const [items, setItems] = useState([]);
 
