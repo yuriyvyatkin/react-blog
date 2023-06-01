@@ -2,7 +2,6 @@ import { useState } from 'react';
 import Form from 'react-bootstrap/Form';
 import { useDispatch } from 'react-redux';
 import { postsActions } from 'redux/actions';
-import './SortBar.css';
 const { sortPosts } = postsActions;
 
 export default function SortBar() {
@@ -24,32 +23,37 @@ export default function SortBar() {
   };
 
   return (
-    <Form>
-      <Form.Group className="sort-bar d-flex mb-3">
-        <Form.Select
-          className="sort-select"
-          value={sortOption}
-          name="option"
-          onChange={handleChange}
-        >
-          <option value="">None</option>
-          <option value="a-z">A to Z</option>
-          <option value="z-a">Z to A</option>
-        </Form.Select>
+    <Form className="sort-bar">
+      <Form.Group className="d-flex align-items-start mb-3">
+        <div className="sort-bar__input-wrapper">
+          <Form.Select
+            className="sort-bar__select"
+            value={sortOption}
+            name="option"
+            onChange={handleChange}
+          >
+            <option value="">Исходный</option>
+            <option value="a-z">от A до Z</option>
+            <option value="z-a">от Z до A</option>
+          </Form.Select>
+          <Form.Text className="sort-bar__select-hint text-muted">
+            * порядок постов
+          </Form.Text>
+        </div>
         <button
           type="submit"
-          className="sort-bar__sort-button btn btn-primary ml-2"
+          className="sort-bar__submit-button btn btn-primary ms-3"
           onClick={handleSubmit}
         >
-          Sort
+          Применить
         </button>
         {sortOption && (
           <button
             type="button"
-            className="sort-bar__reset-button btn btn-danger ml-2"
+            className="sort-bar__reset-button btn btn-danger ms-3"
             onClick={handleReset}
           >
-            Reset
+            Сброс
           </button>
         )}
       </Form.Group>

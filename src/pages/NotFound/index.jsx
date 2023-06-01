@@ -1,18 +1,15 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import './index.css';
 import ROUTES from 'utils/routes';
 
-const NotFound = () => {
+export default function NotFound () {
   return (
-    <div className="not-found-page">
+    <div className="fw-bolder text-center">
       <div>
-        <div>404: Page Not found</div>
+        <h2>404: Page Not found</h2>
         <br />
         <Link to={ROUTES.HOME}>Back to home page</Link>
       </div>
     </div>
   );
 };
-
-export default NotFound;

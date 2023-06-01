@@ -7,7 +7,7 @@ export default function CustomCard({ data }) {
   }
 
   return (
-    <div className="comments overflow-auto w-100 mt-3">
+    <div className="card__comments overflow-auto w-100 mt-3">
       <ListGroup>
         {data.map(({ id, email, body }) => (
           <ListGroup.Item key={id}>

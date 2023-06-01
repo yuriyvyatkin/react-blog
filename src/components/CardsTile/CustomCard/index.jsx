@@ -32,21 +32,21 @@ export default function CustomCard({ id, title, body }) {
 
   return (
     <Col className="mb-4">
-      <Card>
+      <Card className="card">
         <div className="d-flex align-items-center justify-content-center pt-3">
           <Link to={`/user/${id}`}>
-            <div className="avatar d-flex align-items-center justify-content-center rounded-circle bg-gray p-2"></div>
+            <div
+              className="card__avatar avatar rounded-circle bg-secondary"
+              role="img"
+              alt="Аватар"
+            ></div>
           </Link>
         </div>
         <Card.Body className="d-flex flex-column">
           <Card.Title>{title}</Card.Title>
           <Card.Text>{body}</Card.Text>
-          <Button
-            className="mt-auto"
-            variant="primary"
-            onClick={handleClick}
-          >
-            Comments
+          <Button className="mt-auto" variant="primary" onClick={handleClick}>
+            Комментарии
           </Button>
           {comments}
         </Card.Body>

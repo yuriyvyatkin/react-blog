@@ -1,20 +1,16 @@
-.input-wrapper {
+.search-bar__input-wrapper {
   position: relative;
 }
 
-.search-input {
+.search-bar__input {
   width: 400px;
   padding-right: 55px;
 }
 
-.reset-button {
+.search-bar__reset-button {
   position: absolute;
   top: 50%;
   right: 10px;
 
   transform: translateY(-50%);
-}
-
-.search-button {
-  margin-left: 20px;
 }

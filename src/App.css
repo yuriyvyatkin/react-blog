@@ -11,3 +11,13 @@
 
   padding-top: 1.5rem;
 }
+
+.avatar {
+  background-position: center;
+  background-size: cover;
+}
+
+.navbar-toggler.collapsed:focus,
+.navbar-toggler.collapsed:active {
+  box-shadow: none;
+}

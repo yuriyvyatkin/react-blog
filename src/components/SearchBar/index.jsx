@@ -24,29 +24,31 @@ export default function SearchBar() {
   };
 
   return (
-    <Form onSubmit={handleSubmit}>
+    <Form className="search-bar" onSubmit={handleSubmit}>
       <Form.Group className="d-flex mb-3">
-        {/* <Form.Label>Search bar</Form.Label> */}
-        <div className="input-wrapper">
+        <div className="search-bar__input-wrapper">
           <Form.Control
             type="text"
-            className="search-input"
-            placeholder="Start entering the title of the post"
+            className="search-bar__input"
+            placeholder="Начните вводить заголовок поста"
             value={query}
             onChange={handleChange}
           />
           {query && (
             <button
               type="button"
-              className="reset-button btn btn-link text-decoration-none"
+              className="search-bar__reset-button btn btn-link text-decoration-none"
               onClick={handleReset}
             >
               <span>X</span>
             </button>
           )}
         </div>
-        <button type="submit" className="search-button btn btn-primary ml-2">
-          Search
+        <button
+          type="submit"
+          className="search-bar__submit-button btn btn-primary ms-3"
+        >
+          Поиск
         </button>
       </Form.Group>
     </Form>

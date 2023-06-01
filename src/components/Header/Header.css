@@ -1,0 +1,6 @@
+.header__avatar {
+  width: 60px;
+  height: 60px;
+
+  background-image: url(assets/my-avatar.jpg);
+}

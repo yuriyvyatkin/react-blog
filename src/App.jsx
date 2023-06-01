@@ -1,4 +1,5 @@
-import 'bootstrap/dist/css/bootstrap.css';
+import Header from 'components/Header';
+import About from 'pages/About';
 import Home from 'pages/Home';
 import NotFound from 'pages/NotFound';
 import { Provider } from 'react-redux';
@@ -11,11 +12,11 @@ function App() {
   return (
     <Provider store={store}>
       <Router basename={ROUTES.HOME}>
-        {/* <Header /> */}
+        <Header />
         <div className="app-container">
           <Routes>
             <Route path={ROUTES.HOME} element={<Home />} />
-            {/* <Route path={ROUTES.ABOUT} element={ <About /> } /> */}
+            <Route path={ROUTES.ABOUT} element={ <About /> } />
             {/* <Route path={ROUTES.USER} element={ <User /> } /> */}
             <Route path={ROUTES.ANY} element={<NotFound />} />
           </Routes>
