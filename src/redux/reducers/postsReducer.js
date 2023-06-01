@@ -2,10 +2,11 @@ import { Posts } from 'redux/constants/postsConstant';
 
 const initialState = {
   loading: false,
+  error: null,
   data: null,
   filteredData: null,
+  sortedData: null,
   dataChunk: null,
-  error: null,
 };
 
 export const postsReducer = (state = initialState, { type, payload }) => {
@@ -30,6 +31,20 @@ export const postsReducer = (state = initialState, { type, payload }) => {
 
       const filteredPosts = state.data.filter((item) => item.title.includes(payload));
       return { ...state, filteredData: filteredPosts };
+    case Posts.sortPosts:
+      let actualData = state.filteredData || state.data;
+      actualData = actualData.slice();
+      let sortedData;
+
+      if (payload === 'a-z') {
+        sortedData = actualData.sort((a, b) => a.title.toUpperCase() > b.title.toUpperCase());
+      } else if (payload === 'z-a') {
+        sortedData = actualData.sort((a, b) => a.title.toUpperCase() < b.title.toUpperCase());
+      } else {
+        sortedData = null;
+      }
+
+      return { ...state, sortedData: sortedData };
     default:
       return state;
   }

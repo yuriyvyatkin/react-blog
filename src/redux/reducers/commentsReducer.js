@@ -2,8 +2,8 @@ import { Comments } from 'redux/constants/commentsConstant';
 
 const initialState = {
   loading: false,
-  data: null,
   error: null,
+  data: null,
   postId: null,
 };
 

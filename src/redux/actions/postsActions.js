@@ -33,3 +33,10 @@ export const filterPostsByTitle = (data) => {
     payload: data,
   };
 };
+
+export const sortPosts = (data) => {
+  return {
+    type: Posts.sortPosts,
+    payload: data,
+  };
+};

@@ -4,4 +4,5 @@ export const Posts = {
   getPostsError: 'GET_POSTS_ERROR',
   setPostsChunk: 'SET_POSTS_CHUNK',
   filterPostsByTitle: 'FILTER_POSTS_BY_TITLE',
+  sortPosts: 'SORT_POSTS',
 }

@@ -13,13 +13,13 @@ export default function CustomPagination({
   maxConsecutiveItems,
 }) {
   const dispatch = useDispatch();
-  const { data, filteredData } = useSelector((state) => state.posts);
+  const { data, filteredData, sortedData } = useSelector((state) => state.posts);
   const [activePage, setActivePage] = useState(1);
   const [items, setItems] = useState([]);
 
   useEffect(() => {
     if (data !== null) {
-      const actualData = filteredData || data;
+      const actualData = sortedData || filteredData || data;
       const startItemIndex = (activePage - 1) * cardsPerPage;
       const lastItemIndex = startItemIndex + cardsPerPage;
       const dataChunk = actualData.slice(startItemIndex, lastItemIndex);
@@ -153,7 +153,7 @@ export default function CustomPagination({
         scrollUp();
       }, 100);
     }
-  }, [data, filteredData, cardsPerPage, activePage]);
+  }, [data, filteredData, sortedData, cardsPerPage, activePage]);
 
   return <Pagination>{items}</Pagination>;
 }

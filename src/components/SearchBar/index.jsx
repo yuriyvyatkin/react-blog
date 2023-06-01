@@ -11,7 +11,7 @@ export default function SearchBar() {
 
   const handleSubmit = (event) => {
     event.preventDefault();
-    dispatch(filterPostsByTitle(query));
+    dispatch(filterPostsByTitle(query.trim()));
   };
 
   const handleReset = () => {
