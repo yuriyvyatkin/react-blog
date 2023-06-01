@@ -1,9 +1,11 @@
 /* eslint-disable react-hooks/exhaustive-deps */
-import { useState, useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import Pagination from 'react-bootstrap/Pagination';
 import { useDispatch, useSelector } from 'react-redux';
-import './CustomPagination.css';
 import { postsActions } from 'redux/actions';
+import './CustomPagination.css';
+import getPaginationItems from './getPaginationItems';
+import scrollUp from './scrollUp';
 const { setPostsChunk } = postsActions;
 
 export default function CustomPagination({
@@ -15,51 +17,13 @@ export default function CustomPagination({
   const [activePage, setActivePage] = useState(1);
   const [items, setItems] = useState([]);
 
-  const getPaginationItems = ({
-    startNumber,
-    pagesNumber,
-    activePage,
-    prevPaginationItems,
-    lastPaginationItems,
-  }) => {
-    const handleItemClick = (event) => {
-      const pageNumber = Number(event.currentTarget.dataset.pageNumber);
-      setActivePage(pageNumber);
-    };
-    let items = [];
-
-    if (prevPaginationItems) {
-      items.push(...prevPaginationItems);
-    }
-
-    for (let number = startNumber; number <= pagesNumber; number++) {
-      const newItem = (
-        <Pagination.Item
-          key={number}
-          active={number === activePage}
-          data-page-number={number}
-          onClick={handleItemClick}
-        >
-          {number}
-        </Pagination.Item>
-      );
-
-      items.push(newItem);
-    }
-
-    if (lastPaginationItems) {
-      items.push(...lastPaginationItems);
-    }
-
-    return items;
-  };
-
   useEffect(() => {
     if (data !== null) {
       const actualData = filteredData || data;
-      const startItemIndex = (activePage - 1) * (cardsPerPage + 1);
+      const startItemIndex = (activePage - 1) * cardsPerPage;
       const lastItemIndex = startItemIndex + cardsPerPage;
-      dispatch(setPostsChunk(actualData.slice(startItemIndex, lastItemIndex)));
+      const dataChunk = actualData.slice(startItemIndex, lastItemIndex);
+      dispatch(setPostsChunk(dataChunk));
 
       const pagesNumber = Math.ceil(actualData.length / cardsPerPage);
 
@@ -105,6 +69,7 @@ export default function CustomPagination({
           startNumber: 1,
           pagesNumber,
           activePage,
+          activePageSetter: setActivePage,
           prevPaginationItems,
           lastPaginationItems,
         });
@@ -114,6 +79,7 @@ export default function CustomPagination({
             startNumber: 1,
             pagesNumber: maxConsecutiveItems,
             activePage,
+            activePageSetter: setActivePage,
             prevPaginationItems,
           });
           newItems.push(
@@ -124,6 +90,7 @@ export default function CustomPagination({
               startNumber: pagesNumber,
               pagesNumber,
               activePage,
+              activePageSetter: setActivePage,
               lastPaginationItems,
             }),
           );
@@ -132,6 +99,7 @@ export default function CustomPagination({
             startNumber: 1,
             pagesNumber: 1,
             activePage,
+            activePageSetter: setActivePage,
             prevPaginationItems,
           });
           newItems.push(
@@ -142,6 +110,7 @@ export default function CustomPagination({
               startNumber: pagesNumber - maxConsecutiveItems + 1,
               pagesNumber,
               activePage,
+              activePageSetter: setActivePage,
               lastPaginationItems,
             }),
           );
@@ -150,6 +119,7 @@ export default function CustomPagination({
             startNumber: 1,
             pagesNumber: 1,
             activePage,
+            activePageSetter: setActivePage,
             prevPaginationItems,
           });
           newItems.push(
@@ -160,6 +130,7 @@ export default function CustomPagination({
               startNumber: activePage - 1,
               pagesNumber: activePage + 1,
               activePage,
+              activePageSetter: setActivePage,
             }),
           );
           newItems.push(
@@ -170,6 +141,7 @@ export default function CustomPagination({
               startNumber: pagesNumber,
               pagesNumber,
               activePage,
+              activePageSetter: setActivePage,
               lastPaginationItems,
             }),
           );
@@ -177,6 +149,9 @@ export default function CustomPagination({
       }
 
       setItems(newItems);
+      setTimeout(() => {
+        scrollUp();
+      }, 100);
     }
   }, [data, filteredData, cardsPerPage, activePage]);
 
