@@ -9,7 +9,7 @@ function* getUserDataSaga(action) {
     const userId = action.payload;
     const query = userId ? '?id=' + userId : '';
 
-    const userResponse = yield call(() => API.get('/users' + query), action.payload);
+    const userResponse = yield call(() => API.get('users' + query), action.payload);
 
     if (userResponse.status !== 200) {
       throw userResponse.data;

@@ -10,9 +10,11 @@ function* getPostsDataSaga(action) {
     let query = userId ? '?userId=' + userId : '';
 
     const postsResponse = yield call(
-      () => API.get('/posts' + query),
+      () => API.get('posts' + query),
       action.payload,
     );
+
+    console.log(postsResponse);
 
     if (postsResponse.status !== 200) {
       throw postsResponse.data;

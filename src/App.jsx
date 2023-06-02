@@ -12,7 +12,7 @@ import './App.css';
 function App() {
   return (
     <Provider store={store}>
-      <Router basename={ROUTES.HOME}>
+      <Router basename={process.env.PUBLIC_URL}>
         <Header />
         <div className="app-container">
           <Routes>
