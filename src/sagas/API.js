@@ -9,7 +9,7 @@ API.interceptors.request.use((config) => {
   return new Promise((resolve) => {
     setTimeout(() => {
       resolve(config);
-    }, 50);
+    }, 500);
   });
 });
 

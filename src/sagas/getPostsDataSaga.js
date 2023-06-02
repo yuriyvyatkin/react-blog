@@ -6,19 +6,23 @@ const { getPostsSuccess, getPostsError } = postsActions;
 
 function* getPostsDataSaga(action) {
   try {
-    const postsResponse = yield call(() => API.get('/posts'), action.payload);
+    const userId = action.payload;
+    let query = userId ? '?userId=' + userId : '';
+
+    const postsResponse = yield call(
+      () => API.get('/posts' + query),
+      action.payload,
+    );
 
     if (postsResponse.status !== 200) {
       throw postsResponse.data;
     }
 
-    const usersResponse = yield call(() => API.get('/users'), action.payload);
+    const posts = userId
+      ? { userPosts: postsResponse.data }
+      : { posts: postsResponse.data };
 
-    if (usersResponse.status !== 200) {
-      throw usersResponse.data;
-    }
-
-    yield put(getPostsSuccess({ posts: postsResponse.data, users: usersResponse.data }));
+    yield put(getPostsSuccess(posts));
   } catch (e) {
     yield put(getPostsError(e));
   }

@@ -30,7 +30,7 @@ export default function SearchBar() {
           <Form.Control
             type="text"
             className="search-bar__input"
-            placeholder="Начните вводить заголовок поста"
+            placeholder="Введите заголовок поста или его часть"
             value={query}
             onChange={handleChange}
           />

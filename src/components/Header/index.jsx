@@ -1,3 +1,4 @@
+import Avatar from 'components/Avatar';
 import { Nav, Navbar } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
 import ROUTES from 'utils/routes';
@@ -11,16 +12,17 @@ export default function Header() {
   };
 
   return (
-    <Navbar className="header ps-3" expand="sm, md, lg, xl, xxl" bg="dark" variant="dark">
+    <Navbar
+      className="header ps-3"
+      expand="sm, md, lg, xl, xxl"
+      bg="dark"
+      variant="dark"
+    >
       <Navbar.Toggle aria-controls="responsive-navbar-nav" />
       <Navbar.Collapse id="responsive-navbar-nav">
         <Nav>
           <Navbar.Brand>
-            <div
-              className="header__avatar avatar mt-3 rounded-circle bg-secondary"
-              role="img"
-              alt="Аватар"
-            ></div>
+            <Avatar className={'header__avatar'} />
           </Navbar.Brand>
           <Nav.Link as={Link} to={ROUTES.HOME} onClick={handleLinkClick}>
             Список постов

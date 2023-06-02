@@ -1,8 +1,9 @@
 import { Posts } from 'redux/constants/postsConstant';
 
-export const getPosts = () => {
+export const getPosts = (data) => {
   return {
-    type: Posts.getPosts
+    type: Posts.getPosts,
+    payload: data,
   };
 };
 
@@ -24,6 +25,12 @@ export const setPostsChunk = (data) => {
   return {
     type: Posts.setPostsChunk,
     payload: data,
+  };
+};
+
+export const deletePostsChunk = () => {
+  return {
+    type: Posts.deletePostsChunk,
   };
 };
 

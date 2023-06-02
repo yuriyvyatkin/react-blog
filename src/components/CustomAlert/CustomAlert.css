@@ -1,0 +1,10 @@
+.alert {
+  display: inline-block;
+
+  width: 100%;
+  max-width: 500px;
+}
+
+.alert__heading {
+  overflow-wrap: break-word;
+}

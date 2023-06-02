@@ -1,5 +1,6 @@
 import CustomAlert from 'components/CustomAlert';
 import Spinner from 'components/Spinner';
+import Avatar from 'components/Avatar';
 import { Button, Card, Col } from 'react-bootstrap';
 import { useDispatch, useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
@@ -8,7 +9,7 @@ import Comments from './Comments';
 import './CustomCard.css';
 const { getComments } = commentsActions;
 
-export default function CustomCard({ id, title, body }) {
+export default function CustomCard({ id, title, body, userId }) {
   const dispatch = useDispatch();
   const { loading, data, error, postId } = useSelector(
     (state) => state.comments,
@@ -20,7 +21,7 @@ export default function CustomCard({ id, title, body }) {
     if (loading) {
       comments = <Spinner />;
     } else if (error) {
-      comments = <CustomAlert>{error}</CustomAlert>;
+      comments = <CustomAlert>{'Произошла ошибка: ' + error}</CustomAlert>;
     } else {
       comments = <Comments data={data} />;
     }
@@ -34,13 +35,13 @@ export default function CustomCard({ id, title, body }) {
     <Col className="mb-4">
       <Card className="card">
         <div className="d-flex align-items-center justify-content-center pt-3">
-          <Link to={`/user/${id}`}>
-            <div
-              className="card__avatar avatar rounded-circle bg-secondary"
-              role="img"
-              alt="Аватар"
-            ></div>
-          </Link>
+          {userId ? (
+            <Link to={`/user/${userId}`}>
+              <Avatar className={'card__avatar'} />
+            </Link>
+          ) : (
+            <Avatar className={'card__avatar'} />
+          )}
         </div>
         <Card.Body className="d-flex flex-column">
           <Card.Title>{title}</Card.Title>

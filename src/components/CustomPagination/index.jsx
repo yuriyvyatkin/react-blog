@@ -31,7 +31,7 @@ export default function CustomPagination({
 
       let newItems = [];
 
-      if (pagesNumber === 1) {
+      if (pagesNumber <= 1) {
         return;
       }
 
