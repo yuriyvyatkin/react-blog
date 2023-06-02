@@ -5,7 +5,7 @@
   },
   "license": "Mozilla Public License 2.0",
   "repository": "https://github.com/yuriyvyatkin/react-blog/",
-  "homepage": "https://yuriyvyatkin.github.io/react-blog",
+  "homepage": "https://yuriyvyatkin.github.io/react-blog/#",
   "main": "src/index.jsx",
   "private": true,
   "dependencies": {

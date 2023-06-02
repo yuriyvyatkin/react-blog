@@ -4,7 +4,7 @@ import Home from 'pages/Home';
 import NotFound from 'pages/NotFound';
 import User from 'pages/User';
 import { Provider } from 'react-redux';
-import { Route, BrowserRouter as Router, Routes } from 'react-router-dom';
+import { Route, HashRouter as Router, Routes } from 'react-router-dom';
 import { store } from 'redux/store';
 import ROUTES from 'utils/routes';
 import './App.css';
@@ -12,7 +12,7 @@ import './App.css';
 function App() {
   return (
     <Provider store={store}>
-      <Router basename={process.env.PUBLIC_URL}>
+      <Router>
         <Header />
         <div className="app-container">
           <Routes>
