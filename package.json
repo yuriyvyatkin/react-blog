@@ -5,7 +5,7 @@
   },
   "license": "Mozilla Public License 2.0",
   "repository": "https://github.com/yuriyvyatkin/react-blog/",
-  "homepage": "https://yuriyvyatkin.github.io/",
+  "homepage": "https://yuriyvyatkin.github.io/react-blog",
   "main": "src/index.jsx",
   "private": true,
   "dependencies": {
@@ -21,6 +21,8 @@
     "redux-saga": "^1.2.3"
   },
   "scripts": {
+    "predeploy": "npm run build",
+    "deploy": "gh-pages -d build",
     "start": "react-scripts start",
     "build": "react-scripts build",
     "eject": "react-scripts eject"
@@ -43,6 +45,7 @@
     ]
   },
   "devDependencies": {
-    "@babel/plugin-proposal-private-property-in-object": "^7.21.0"
+    "@babel/plugin-proposal-private-property-in-object": "^7.21.0",
+    "gh-pages": "^5.0.0"
   }
 }
