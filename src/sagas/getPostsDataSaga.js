@@ -14,8 +14,6 @@ function* getPostsDataSaga(action) {
       action.payload,
     );
 
-    console.log(postsResponse);
-
     if (postsResponse.status !== 200) {
       throw postsResponse.data;
     }
