@@ -1,6 +1,6 @@
 import CustomAlert from 'components/CustomAlert';
-import Spinner from 'components/Spinner';
 import Avatar from 'components/Avatar';
+import Spinner from 'components/Spinner';
 import { Button, Card, Col } from 'react-bootstrap';
 import { useDispatch, useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';

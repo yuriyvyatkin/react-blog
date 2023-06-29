@@ -21,8 +21,8 @@ export const getUserError = (data) => {
   };
 };
 
-export const deleteUserData = () => {
+export const clearUserData = () => {
   return {
-    type: User.deleteUserData,
+    type: User.clearUserData,
   };
 };

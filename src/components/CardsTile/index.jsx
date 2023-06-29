@@ -28,7 +28,9 @@ export default function CardsTile({ userId }) {
     }
 
     if (!dataChunk && isUserPage) {
-      dispatch(getPosts(userId));
+      setTimeout(() => {
+        dispatch(getPosts(userId));
+      }, 500);
     }
   }, [dataChunk]);
 

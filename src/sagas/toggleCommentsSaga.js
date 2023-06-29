@@ -8,9 +8,15 @@ const { getCommentsSuccess, getCommentsError } = commentsActions;
 function* toggleCommentsSaga(action) {
   try {
     const data = yield select((state) => state.comments.data);
+
+    const samePost = data && action.payload === data[0].postId;
+
     if (data) {
       yield put(getCommentsSuccess(null));
-      return;
+
+      if (samePost) {
+        return;
+      }
     }
 
     const commentsResponse = yield call(() =>
