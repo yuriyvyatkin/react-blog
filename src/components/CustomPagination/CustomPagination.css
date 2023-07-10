@@ -17,5 +17,18 @@
 
 .page-item.ellipsis > .page-link:hover {
   background-color: initial;
+
   cursor: auto;
+}
+
+@media (max-width: 450px) {
+  .pagination .page-link {
+    padding: 12px;
+  }
+}
+
+@media (max-width: 400px) {
+  .pagination .page-link {
+    padding: 10px;
+  }
 }

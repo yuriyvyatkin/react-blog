@@ -1,0 +1,32 @@
+.sort-bar__wrapper {
+  display: flex;
+  align-items: flex-start;
+}
+
+.sort-bar__submit-button {
+  margin-left: 1rem;
+}
+
+.sort-bar__reset-button {
+  margin-left: 1rem;
+}
+
+@media (max-width: 450px) {
+  .sort-bar__wrapper {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    text-align: center;
+  }
+
+  .sort-bar__submit-button {
+    margin-top: 15px;
+    margin-left: 0;
+  }
+
+  .sort-bar__reset-button {
+    margin-top: 15px;
+    margin-left: 0;
+  }
+}

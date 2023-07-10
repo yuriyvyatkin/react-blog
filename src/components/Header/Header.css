@@ -5,3 +5,47 @@
 
   background-image: url(assets/my-avatar.jpg);
 }
+
+.header__title {
+  padding-right: 80px;
+}
+
+.header__banner {
+  position: absolute;
+  top: 40px;
+  right: 20px;
+}
+
+@media (max-width: 800px) {
+  .header {
+    padding-right: 27px;
+  }
+
+  .header__banner {
+    position: static;
+  }
+}
+
+@media (max-width: 600px) {
+  .header {
+    display: flex;
+    flex-direction: column;
+
+    padding-right: 0;
+
+    text-align: center;
+  }
+
+  .header__nav {
+    align-items: center;
+  }
+
+  .header__brand {
+    margin-right: 0;
+  }
+
+  .header__title {
+    margin-top: 20px;
+    padding-right: 0;
+  }
+}

@@ -4,3 +4,27 @@
 
   background-image: url(assets/avatar.jpg);
 }
+
+.card__content {
+  height: 260px;
+}
+
+.card__content__header {
+  font-size: 20px;
+}
+
+.card__title {
+  display: -webkit-box;
+  overflow: hidden;
+
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 3;
+}
+
+.card__body {
+  display: -webkit-box;
+  overflow: hidden;
+
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 3;
+}
