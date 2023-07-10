@@ -1,7 +1,7 @@
 import { call, put, takeLatest, select } from 'redux-saga/effects';
 import { commentsActions } from 'redux/actions';
 import { Comments } from 'redux/constants/commentsConstant';
-import API from './API';
+import JSONAPI from './JSONAPI';
 
 const { getCommentsSuccess, getCommentsError } = commentsActions;
 
@@ -19,15 +19,22 @@ function* toggleCommentsSaga(action) {
       }
     }
 
-    const commentsResponse = yield call(() =>
-      API.get(`/comments?postId=${action.payload}`),
+    let commentsResponse = yield call(() =>
+      JSONAPI.get(`/comments?postId=${action.payload}`),
     );
 
     if (commentsResponse.status !== 200) {
       throw commentsResponse.data;
+    } else {
+      commentsResponse = commentsResponse.data.map((item) => {
+        return {
+          ...item,
+          email: item.email.toLowerCase(),
+        }
+      })
     }
 
-    yield put(getCommentsSuccess(commentsResponse.data));
+    yield put(getCommentsSuccess(commentsResponse));
   } catch (e) {
     yield put(getCommentsError(e));
   }

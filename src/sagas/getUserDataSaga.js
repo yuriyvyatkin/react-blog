@@ -1,7 +1,7 @@
 import { call, put, takeLatest } from 'redux-saga/effects';
 import { userActions } from 'redux/actions';
 import { User } from 'redux/constants/userConstant';
-import API from './API';
+import JSONAPI from './JSONAPI';
 const { getUserSuccess, getUserError } = userActions;
 
 function* getUserDataSaga(action) {
@@ -9,13 +9,21 @@ function* getUserDataSaga(action) {
     const userId = action.payload;
     const query = userId ? '?id=' + userId : '';
 
-    const userResponse = yield call(() => API.get('users' + query), action.payload);
+    let userResponse = yield call(() => JSONAPI.get('users' + query), action.payload);
 
     if (userResponse.status !== 200) {
       throw userResponse.data;
+    } else {
+      userResponse = userResponse.data.map((item) => {
+        return {
+          ...item,
+          email: item.email.toLowerCase(),
+          phone: item.phone.replace(/ .*/, ''),
+        }
+      })
     }
 
-    yield put(getUserSuccess(userResponse.data));
+    yield put(getUserSuccess(userResponse));
   } catch (e) {
     yield put(getUserError(e));
   }

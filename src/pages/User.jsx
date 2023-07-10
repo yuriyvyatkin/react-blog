@@ -1,16 +1,19 @@
-import BackButton from 'components/BackButton';
 import CardsTile from 'components/CardsTile';
 import UserInfo from 'components/UserInfo';
-import { useParams } from 'react-router-dom';
+import { useLocation, useParams } from 'react-router-dom';
 
 export default function User() {
   const { userId } = useParams();
+  function useQuery() {
+    return new URLSearchParams(useLocation().search);
+  }
+  const query = useQuery();
+  const userPageAvatar = query.get('avatar');
 
   return (
     <>
-      <BackButton />
-      <UserInfo userId={userId} />
-      <CardsTile userId={userId} />
+      <UserInfo userId={userId} avatarURL={userPageAvatar} />
+      <CardsTile userPageId={userId} userPageAvatar={userPageAvatar} />
     </>
   );
 }

@@ -11,11 +11,11 @@ export default function CustomCard({ data }) {
       <ListGroup>
         {data.map(({ id, email, body }) => (
           <ListGroup.Item key={id}>
-            <h5>
-              <a href={`mailto:${email}`} target="_blank" rel="noreferrer">
-                {email}
-              </a>
-            </h5>
+            <h6>Почта:</h6>
+            <a href={`mailto:${email}`} target="_blank" rel="noreferrer">
+              {email}
+            </a>
+            <h6 className="mt-2">Сообщение:</h6>
             <span>{body}</span>
           </ListGroup.Item>
         ))}

@@ -35,6 +35,7 @@ export const postsReducer = (state = initialState, { type, payload }) => {
       const filteredPosts = state.data.filter((item) =>
         item.title.includes(payload),
       );
+
       return { ...state, filteredData: filteredPosts };
     case Posts.sortPosts:
       let actualData = state.filteredData || state.data;

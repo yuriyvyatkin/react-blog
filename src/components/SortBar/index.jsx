@@ -2,6 +2,7 @@ import { useState } from 'react';
 import Form from 'react-bootstrap/Form';
 import { useDispatch } from 'react-redux';
 import { postsActions } from 'redux/actions';
+import './SortBar.css';
 const { sortPosts } = postsActions;
 
 export default function SortBar() {
@@ -24,8 +25,8 @@ export default function SortBar() {
 
   return (
     <Form className="sort-bar">
-      <Form.Group className="d-flex align-items-start mb-3">
-        <div className="sort-bar__input-wrapper">
+      <Form.Group className="sort-bar__wrapper mb-3">
+        <div>
           <Form.Select
             className="sort-bar__select"
             value={sortOption}
@@ -42,7 +43,7 @@ export default function SortBar() {
         </div>
         <button
           type="submit"
-          className="sort-bar__submit-button btn btn-primary ms-3"
+          className="sort-bar__submit-button btn btn-primary"
           onClick={handleSubmit}
         >
           Применить
@@ -50,7 +51,7 @@ export default function SortBar() {
         {sortOption && (
           <button
             type="button"
-            className="sort-bar__reset-button btn btn-danger ms-3"
+            className="sort-bar__reset-button btn btn-danger"
             onClick={handleReset}
           >
             Сброс

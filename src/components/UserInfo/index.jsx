@@ -1,4 +1,6 @@
 /* eslint-disable react-hooks/exhaustive-deps */
+import BackButton from './BackButton';
+import ShowButton from './ShowButton';
 import CustomAlert from 'components/CustomAlert';
 import { useState, useEffect, useLayoutEffect } from 'react';
 import { Container, Row, Col, Card } from 'react-bootstrap';
@@ -6,7 +8,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { userActions } from 'redux/actions';
 const { getUser, clearUserData } = userActions;
 
-export default function User({ userId }) {
+export default function User({ userId, avatarURL }) {
   const dispatch = useDispatch();
   const { data, loading, error } = useSelector((state) => state.user);
   const userData = data && data[0];
@@ -38,7 +40,7 @@ export default function User({ userId }) {
           <CustomAlert>{'Пользователь не найден.'}</CustomAlert>
         )}
         {loadingСompleted && userData && (
-          <Row className="row-cols-1 row-cols-sm-2 row-cols-md-3 row-cols-lg-4 row-cols-xl-5 mb-4">
+          <Row className="row-cols-1 row-cols-sm-2 row-cols-md-3 row-cols-lg-4 row-cols-xl-5 mb-4 justify-content-center">
             <Col>
               <Card>
                 <Card.Body>
@@ -49,9 +51,13 @@ export default function User({ userId }) {
                   <Card.Text>Сайт: {userData.website}</Card.Text>
                 </Card.Body>
               </Card>
+              <BackButton />
+              <ShowButton avatarURL={avatarURL} />
+              <h5 className="mt-4 text-center">Посты автора: </h5>
             </Col>
           </Row>
         )}
+
       </Container>
     </>
   );

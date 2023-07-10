@@ -9,8 +9,8 @@ export default function BackButton() {
   };
 
   return (
-    <Button variant="primary" onClick={handleGoBack}>
-      Назад
+    <Button className="mt-4 w-100" variant="primary" onClick={handleGoBack}>
+      Вернуться на главную
     </Button>
   );
 }
