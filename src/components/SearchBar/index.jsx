@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useRef, useState } from 'react';
 import Form from 'react-bootstrap/Form';
 import { useDispatch } from 'react-redux';
 import { postsActions } from 'redux/actions';
@@ -8,10 +8,19 @@ const { filterPostsByTitle } = postsActions;
 export default function SearchBar() {
   const dispatch = useDispatch();
   const [query, setQuery] = useState('');
+  const inputRef = useRef(null);
 
   const handleSubmit = (event) => {
     event.preventDefault();
-    dispatch(filterPostsByTitle(query.trim()));
+
+    const trimmedQuery = query.trim();
+
+    if (trimmedQuery.length) {
+      dispatch(filterPostsByTitle(trimmedQuery));
+    } else {
+      setQuery('');
+      inputRef.current.focus();
+    }
   };
 
   const handleReset = () => {
@@ -25,7 +34,7 @@ export default function SearchBar() {
 
   return (
     <Form className="search-bar" onSubmit={handleSubmit}>
-      <Form.Group className="d-flex mb-3">
+      <Form.Group className="search-bar__group d-flex mb-3">
         <div className="search-bar__input-wrapper">
           <Form.Control
             type="text"
@@ -33,6 +42,7 @@ export default function SearchBar() {
             placeholder="Введите заголовок поста или его часть"
             value={query}
             onChange={handleChange}
+            ref={inputRef}
           />
           {query && (
             <button
@@ -46,7 +56,7 @@ export default function SearchBar() {
         </div>
         <button
           type="submit"
-          className="search-bar__submit-button btn btn-primary ms-3"
+          className="search-bar__submit-button btn btn-primary"
         >
           Поиск
         </button>
