@@ -5,12 +5,4 @@ const API = axios.create({
   baseURL: API_URL,
 });
 
-API.interceptors.request.use((config) => {
-  return new Promise((resolve) => {
-    setTimeout(() => {
-      resolve(config);
-    }, 500);
-  });
-});
-
 export default API;
