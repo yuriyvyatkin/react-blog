@@ -43,6 +43,8 @@ export default function CardsTile({ userPageId, userPageAvatar }) {
 
   const loadingСompleted = prevLoading && !currentLoading;
 
+  console.log(dataChunk);
+
   return (
     <>
       {loading && <Spinner />}
@@ -51,7 +53,7 @@ export default function CardsTile({ userPageId, userPageAvatar }) {
         {loadingСompleted && dataChunk?.length === 0 && (
           <CustomAlert>{'По вашему запросу ничего не найдено.'}</CustomAlert>
         )}
-        {loadingСompleted && dataChunk && (
+        {dataChunk && (
           <Row className="row-cols-1 row-cols-sm-2 row-cols-md-3 row-cols-lg-4 row-cols-xl-5">
             {dataChunk.map(({ id, title, body, userId, avatar }) => (
               <CustomCard
