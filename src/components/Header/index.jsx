@@ -33,7 +33,9 @@ export default function Header() {
         </Nav>
       </Navbar.Collapse>
       <h1 className="header__title fst-italic text-center text-white mx-auto">
-        NFT БЛОГ
+        <Nav.Link as={Link} to={ROUTES.HOME}>
+          NFT БЛОГ
+        </Nav.Link>
       </h1>
       <a
         className="header__banner"
