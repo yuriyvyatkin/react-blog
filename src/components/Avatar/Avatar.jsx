@@ -1,3 +1,5 @@
+import './Avatar.css';
+
 export default function Avatar({ className, avatar }) {
   return (
     <div
